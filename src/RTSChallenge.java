@@ -5,13 +5,14 @@ public class RTSChallenge {
 	public static void main(String[] args) 
 	{
 		RTSChallenge driver = new RTSChallenge();
-		System.out.println(driver.stringRotation("MyString",2));
-		System.out.println(driver.aboveBelow(new int[] {1,5,2,1,20,24,10,66,6,6,6,6,6,6}, 6));
+		System.out.println("String Rotation: " + driver.stringRotation("MyString",2));
+		System.out.println("Simple String Rotation: " + driver.simpleStringRotation("MyString",2));
+		System.out.println("Above Below: " + driver.aboveBelow(new int[] {1,5,2,1,20,24,10,66,6,6,6,6,6,6}, 6));
 	}
 	
 	public HashMap<String,Integer> aboveBelow(int[] numList, int compNum) 
 	{
-		HashMap<String,Integer> map = new HashMap<>();
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
 		
 		// Create keys for above / below / equal with default value of 0
 		map.put("equal", 0);
@@ -22,11 +23,11 @@ public class RTSChallenge {
 		{
 			// Increment key value by 1 for each case
 			if (numList[i] > compNum) {
-				map.put("above", map.get("above").intValue()+1);
+				map.put("above", map.get("above")+1);
 			} else if (numList[i] < compNum) {
-				map.put("below", map.get("below").intValue()+1);
+				map.put("below", map.get("below")+1);
 			} else {
-				map.put("equal", map.get("equal").intValue()+1);
+				map.put("equal", map.get("equal")+1);
 			}
 		}
 		
@@ -65,8 +66,17 @@ public class RTSChallenge {
 			charStr[i] = str.charAt((rem+i)%len);
 		}
 		
+		
 		// Create and return String object from the char array.
 		return new String(charStr);
+	}
+	
+	public String simpleStringRotation(String str, int rotation) 
+	{
+		// The remainder of characters that will remain. 
+		int rem = str.length() - (rotation%str.length());
+		// This method simply takes [rotation] amount of characters and places them at the start of the string. 
+		return str.substring(rem) + str.substring(0, rem);
 	}
 
 }
